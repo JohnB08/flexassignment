@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+      crossorigin="anonymous"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="./index.js" defer></script>
+
+    <title>Flexbox website</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+
+      body {
+        font-family: "poppins", sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+        color: #333;
+        background-color: #a1c3ff;
+        position: relative;
+      }
+      img {
+        max-width: 100%;
+        padding-top: 10px;
+        height: 450px;
+        padding-bottom: 10px;
+      }
+      h1,
+      h2 {
+        margin-bottom: 15px;
+      }
+      .container {
+        /* These two props make the layout to be in center of the webpage */
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 30px;
+      }
+      .nav-bar {
+        background: #3474e6;
+        color: white;
+        height: 60px;
+      }
+      ul {
+        list-style-type: none;
+      }
+      .nav-bar .logo {
+        font-size: x-large;
+        font-weight: bold;
+      }
+      .normal_btn a {
+        text-decoration: none;
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+      }
+      .normal_btn a:hover {
+        color: lightblue;
+      }
+      .nav-bar .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+      }
+      .nav-bar ul {
+        display: flex;
+      }
+      .nav-bar ul li {
+        margin-left: 20px;
+      }
+      #hambtn,
+      #overlay {
+        display: none;
+      }
+      .menubtn {
+        background: none;
+        border: 0;
+        height: 64px;
+        width: 64px;
+        /* Here object Fit worked.
+        I suspect it's because it's not a flexbox container 
+        and has a set width and height. */
+        object-fit: fill;
+      }
+      .menubtn img {
+        height: 100%;
+      }
+      #overlay {
+        position: fixed;
+        top: 0%;
+        right: 0%;
+        width: 100%;
+        height: 40vh;
+        flex-direction: column;
+        background: #3474e6;
+      }
+      .overlayHead {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        height: 17.5%;
+        align-items: center;
+        padding: 0 30px;
+      }
+      #overlay ul {
+        width: 100%;
+        height: 82.5%;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+      }
+      #overlay ul .normalbtn {
+        padding: 15% 0;
+      }
+      #exitbtn {
+        align-self: flex-end;
+        justify-self: start;
+      }
+
+      .header {
+        background-color: #0a51cc;
+        color: white;
+        min-height: 400px;
+      }
+      .header h1 {
+        font-size: 3rem;
+        font-weight: bold;
+        line-height: 1.2;
+      }
+      .header img {
+        max-width: 400px;
+      }
+      .header .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .boxes .container {
+        display: flex;
+        justify-content: space-between;
+      }
+      .box {
+        flex: 1;
+        background-color: #0a51cc;
+        color: #fff;
+        border-radius: 10px;
+        margin: 20px 10px;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.6);
+        padding: 15px 20px;
+      }
+      .box i {
+        margin-right: 10px;
+      }
+      @media only screen and (max-width: 800px) {
+        body {
+          font-size: 14px;
+        }
+        .header img {
+          max-width: 300px;
+          height: 400px;
+        }
+      }
+      @media only screen and (max-width: 600px) {
+        .nav-bar {
+          position: sticky;
+          top: 0;
+        }
+        #normnav {
+          display: none;
+        }
+        #hambtn {
+          display: block;
+        }
+        .header .container .imgcontainer {
+          width: 100%;
+          height: 40vh;
+          overflow: hidden;
+          margin-bottom: 30px;
+        }
+        /* It seems when using percentages and scaling units, object-fit doesnt' work anymore. Have to use overflow: hidden for the image to not clip outside it's parent.
+         Or is it because it's a flexbox container. */
+        img {
+          width: 100%;
+        }
+        .header .container {
+          flex-direction: column;
+          text-align: center;
+          padding-top: 15px;
+        }
+        .boxes .container {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- nav bar -->
+    <nav class="nav-bar">
+      <div class="container">
+        <div class="logo">Flexbox</div>
+        <ul id="normnav">
+          <li class="normal_btn">
+            <a href="#Home">Home</a>
+          </li>
+          <li class="normal_btn">
+            <a href="#About">About</a>
+          </li>
+          <li class="normal_btn">
+            <a href="#Contact">Contact</a>
+          </li>
+        </ul>
+        <button id="hambtn" class="menubtn">
+          <img src="./img/Hamburger_icon.svg" alt="Menu Button" />
+        </button>
+        <div id="overlay">
+          <div class="overlayHead">
+            <div class="logo">Flexbox</div>
+            <button class="menubtn" id="exitbtn">
+              <img
+                src="./img/return-button-svgrepo-com.svg"
+                alt="Exit overlay button"
+              />
+            </button>
+          </div>
+          <ul>
+            <li class="normal_btn">
+              <a href="#Home">Home</a>
+            </li>
+            <li class="normal_btn">
+              <a href="#About">About</a>
+            </li>
+            <li class="normal_btn">
+              <a href="#Contact">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Header with heading, text, image -->
+    <header class="header">
+      <div class="container">
+        <div>
+          <h1>Flexbox Crash Course</h1>
+          <p>
+            This property goes on the Container div/element. We can assign it
+            along with the flex- direction: row / column . Row we can assign the
+            elements horizontally on the page and column where we can assign
+            elements vertically.
+          </p>
+        </div>
+        <div class="imgcontainer">
+          <img
+            src="https://images.unsplash.com/photo-1677419734433-2420e3bf1093?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDk1fDZzTVZqVExTa2VRfHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=700&q=60"
+            alt=""
+          />
+        </div>
+      </div>
+    </header>
+
+    <section class="boxes">
+      <div class="container">
+        <!-- Box 1 -->
+        <div class="box">
+          <h2>
+            <i class="fas fa-arrows-alt-v"></i>
+            <!-- This i tag is to add symbols. To know more about i tag with class name ref this link. https://fontawesome.com/v4/icon/arrows-->
+            Allignment and space
+          </h2>
+          <p>
+            We use it to wrap or nowrap the elements. If we make the browser
+            window small should they go down to the next line or not.
+          </p>
+        </div>
+        <!-- Box 2 -->
+        <div class="box">
+          <h2>
+            <i class="fas fa-arrows-alt"></i>
+            <!-- This i tag is to add symbols. -->
+            Allignment and space
+          </h2>
+          <p>
+            We use it to wrap or nowrap the elements. If we make the browser
+            window small should they go down to the next line or not.
+          </p>
+        </div>
+        <!-- Box 3 -->
+        <div class="box">
+          <h2>
+            <i class="fas fa-mobile"></i>
+            <!-- This i tag is to add symbols. -->
+            Allignment and space
+          </h2>
+          <p>
+            We use it to wrap or nowrap the elements. If we make the browser
+            window small should they go down to the next line or not.
+          </p>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
