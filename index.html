@@ -35,17 +35,20 @@
         background-color: #a1c3ff;
         position: relative;
       }
-      img {
-        padding: 10px;
-      }
       h1,
       h2 {
-        margin-bottom: 15px;
+        margin-bottom: 0.5em;
       }
+      .container {
+        width: 60vw;
+      }
+
       .nav-bar {
         background: #3474e6;
         color: white;
         height: 7.5vh;
+        display: flex;
+        justify-content: center;
       }
       ul {
         list-style-type: none;
@@ -56,23 +59,24 @@
         font-weight: bold;
       }
       .nav-bar ul {
+        justify-content: flex-end;
+        align-items: center;
         gap: 10%;
       }
       .normal_btn a {
         text-decoration: none;
         color: white;
-        font-size: 18px;
+        font-size: 1.2em;
         font-weight: bold;
       }
       .normal_btn a:hover {
         color: lightblue;
       }
       .nav-bar .container {
-        padding: 0 5%;
+        height: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        height: 100%;
       }
       #hambtn,
       #overlay {
@@ -87,6 +91,7 @@
         I suspect it's because it's not a flexbox container
         and has a set width and height. */
         object-fit: fill;
+        padding: 0.5em;
       }
       .menubtn img {
         height: 100%;
@@ -104,13 +109,13 @@
         display: flex;
         width: 100%;
         justify-content: space-between;
-        height: 18.5%;
+        height: 19%;
         align-items: center;
         padding: 0 5%;
       }
       #overlay ul {
         width: 100%;
-        height: 81.5%;
+        height: 81%;
         flex-direction: column;
         justify-content: space-around;
         align-items: center;
@@ -138,22 +143,21 @@
       .header .container {
         display: flex;
         align-items: center;
-        width: 80vw;
         justify-content: space-between;
-        padding: 2.5% 5%;
+        padding: 2em 0;
       }
       .textcontainer {
-        width: 50%;
+        width: 40%;
       }
       .imgcontainer {
         width: 50%;
         display: flex;
-        justify-content: center;
+        justify-content: flex-end;
         align-items: center;
       }
       .header .container .imgcontainer img {
         max-width: 100%;
-        max-height: 60 vh;
+        max-height: 50vh;
       }
       .boxes {
         display: flex;
@@ -162,20 +166,25 @@
       }
       .boxes .container {
         display: flex;
-        width: 80vw;
         justify-content: space-between;
+        gap: 2.5%;
+        padding: 2.5% 0;
       }
       .box {
         flex: 1;
         background-color: #0a51cc;
         color: #fff;
-        border-radius: 10px;
-        margin: 20px 10px;
-        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.6);
-        padding: 15px 20px;
+        border-radius: 0.75em;
+        box-shadow: 0 0.1em 0.25em rgba(0, 0, 0, 0.6);
+        padding: 1em 1.5em;
       }
       .box i {
-        margin-right: 10px;
+        margin-right: 0.5em;
+      }
+      @media only screen and (max-width: 1200px) {
+        .container {
+          width: 80vw;
+        }
       }
       @media only screen and (max-width: 800px) {
         body {
@@ -193,6 +202,9 @@
         #hambtn {
           display: block;
         }
+        .container {
+          width: 90%;
+        }
         .header .container .textcontainer {
           width: 100%;
         }
@@ -200,17 +212,21 @@
           width: 100%;
           height: 40vh;
           overflow: hidden;
-          margin-bottom: 30px;
+          justify-content: center;
         }
-        /* It seems when using percentages and scaling units, object-fit doesnt' work anymore. Have to use overflow: hidden for the image to not clip outside it's parent.
+        /* It seems when using percentages and scaling units, object-fit doesnt' work anymore. It just doesn't apply.
+         Have to use overflow: hidden for the image to not clip outside it's parent.
          Or is it because it's a flexbox container. */
         .header .container {
           flex-direction: column;
           text-align: center;
-          padding-top: 15px;
+          padding-top: 1em;
+          height: 80vh;
         }
         .boxes .container {
           flex-direction: column;
+          height: 60vh;
+          gap: 5%;
         }
       }
     </style>
